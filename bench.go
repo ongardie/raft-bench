@@ -77,10 +77,10 @@ func main() {
 			panic(err)
 		}
 
-		server.AddEventListener("addPeer", createListenerFunc(server))
-
+		server.AddEventListener("addPeer", createAddListenerFunc(server))
 		fmt.Println("start as a leader")
 	}
+	server.AddEventListener("stateChange", createStateChangeListenerFunc(server))
 	// Create wrapping HTTP server.
 	mux := http.NewServeMux()
 	t.Install(server, mux)
@@ -106,11 +106,19 @@ func createJoinHandler(s raft.Server) func(w http.ResponseWriter, req *http.Requ
 	}
 }
 
-func createListenerFunc(s raft.Server) func(e raft.Event) {
+func createAddListenerFunc(s raft.Server) func(e raft.Event) {
 	return func(e raft.Event) {
 		fmt.Println("add peer")
 		if len(s.Peers()) == *peerNumber-1 {
-			go send(s, 100)
+			go send(s, 1000)
+		}
+	}
+}
+
+func createStateChangeListenerFunc(s raft.Server) func(e raft.Event) {
+	return func(e raft.Event) {
+		if e.Value() == "leader" {
+			go send(s, 1000)
 		}
 	}
 }

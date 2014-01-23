@@ -34,6 +34,8 @@ func currentSend(s raft.Server, num int, done chan bool) {
 		_, err := s.Do(command)
 		if err != nil {
 			fmt.Println(err)
+			return
+			done <- true
 		}
 	}
 	fmt.Println("finished!")
