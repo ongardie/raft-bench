@@ -9,6 +9,7 @@ import (
 	"net/http"
 	"os"
 	"runtime"
+	"time"
 
 	"github.com/goraft/raft"
 )
@@ -43,6 +44,8 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+
+	server.SetHeartbeatTimeout(time.Millisecond * 2)
 
 	err = server.Start()
 	if err != nil {
