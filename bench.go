@@ -11,7 +11,7 @@ import (
 	"runtime"
 	"time"
 
-	"github.com/goraft/raft"
+	"github.com/xiangli-cmu/raft"
 )
 
 var (

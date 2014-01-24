@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/goraft/raft"
+	"github.com/xiangli-cmu/raft"
 )
 
 func init() {
