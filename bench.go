@@ -46,6 +46,7 @@ func main() {
 	}
 
 	server.SetHeartbeatTimeout(time.Millisecond * 2)
+	server.SetElectionTimeout(1 * time.Second)
 
 	err = server.Start()
 	if err != nil {
