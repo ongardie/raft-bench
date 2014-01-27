@@ -9,8 +9,8 @@ func init() {
 }
 
 type SetCommand struct {
-	key   string
-	value string
+	Key   string
+	Value string
 }
 
 func (c *SetCommand) CommandName() string {

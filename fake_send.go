@@ -26,8 +26,8 @@ func send(s raft.Server, num int) {
 
 func currentSend(s raft.Server, num int, done chan bool) {
 	command := &SetCommand{
-		key:   "testKey",
-		value: "testValue",
+		Key:   "testKey",
+		Value: "testValue",
 	}
 
 	for i := 0; i < num; i++ {
